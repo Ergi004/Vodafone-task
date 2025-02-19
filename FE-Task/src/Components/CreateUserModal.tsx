@@ -5,8 +5,6 @@ import { Api } from "../Api/UserApi";
 import { IoAdd } from "react-icons/io5";
 
 interface CreateModalProps {
-  user: User;
-  setUser: React.Dispatch<React.SetStateAction<User>>;
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
 }
 

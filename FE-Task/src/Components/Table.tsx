@@ -7,22 +7,6 @@ import { UpdateUserModal } from "./UpdateUserModal";
 
 export const Table = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [user, setUser] = useState<User>({
-    name: "",
-    username: "",
-    email: "",
-    address: {
-      street: "",
-      suite: "",
-      city: "",
-      zipcode: "",
-      geo: { lat: "", lng: "" },
-    },
-    phone: "",
-    website: "",
-    company: { name: "", catchPhrase: "", bs: "" },
-    id: 0,
-  });
 
   const getUsers = async () => {
     const data = await Api.getUsers();
@@ -35,7 +19,7 @@ export const Table = () => {
 
   return (
     <table className="table-auto flex flex-col min-w-[1500px]">
-      <CreateUserModal user={user} setUser={setUser} setUsers={setUsers} />
+      <CreateUserModal setUsers={setUsers} />
       <thead className="h-20 font-bold text-lg text-whtie flex items-center w-full">
         <tr className="grid grid-cols-8 w-full">
           <th className="col-span-1 border-r">Id</th>
@@ -52,7 +36,7 @@ export const Table = () => {
         {users.map((user, idx) => {
           return (
             <tr
-              key={idx}
+              key={user.id}
               className={clsx(
                 "grid grid-cols-8 py-2",
                 idx % 2 === 0 ? "bg-gray-100" : "bg-white"
