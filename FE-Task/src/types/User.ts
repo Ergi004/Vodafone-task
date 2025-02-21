@@ -1,7 +1,3 @@
-export interface Root {
-  users: User[];
-}
-
 export interface User {
   id: number;
   name: string;

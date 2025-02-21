@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { CreateUserModal } from "./CreateUserModal";
 import { UpdateUserModal } from "./UpdateUserModal";
 
-export const Table = () => {
+export const UserTable = () => {
   const [users, setUsers] = useState<User[]>([]);
 
   const getUsers = async () => {

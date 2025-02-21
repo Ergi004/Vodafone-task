@@ -3,27 +3,12 @@ import { Modal } from "./Modal";
 import { User } from "../types/User";
 import { Api } from "../Api/UserApi";
 import { IoAdd } from "react-icons/io5";
+import { initalUserState } from "./features/User";
 
 interface CreateModalProps {
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
 }
 
-const initalUserState: User = {
-  id: 0,
-  name: "",
-  username: "",
-  email: "",
-  address: {
-    street: "",
-    suite: "",
-    city: "",
-    zipcode: "",
-    geo: { lat: "", lng: "" },
-  },
-  phone: "",
-  website: "",
-  company: { name: "", catchPhrase: "", bs: "" },
-};
 export const CreateUserModal = ({ setUsers }: CreateModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState<User>(initalUserState);

@@ -3,6 +3,7 @@ import { Modal } from "./Modal";
 import { User } from "../types/User";
 import { Api } from "../Api/UserApi";
 import { SlOptionsVertical } from "react-icons/sl";
+import { initalUserState } from "./features/User";
 
 interface UpdateModalProps {
   userId: number;
@@ -10,44 +11,40 @@ interface UpdateModalProps {
 }
 export const UpdateUserModal = ({ setUsers, userId }: UpdateModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState<User>({
-    name: "",
-    username: "",
-    email: "",
-    address: {
-      street: "",
-      suite: "",
-      city: "",
-      zipcode: "",
-      geo: { lat: "", lng: "" },
-    },
-    phone: "",
-    website: "",
-    company: { name: "", catchPhrase: "", bs: "" },
-    id: 0,
-  });
-
+  const [user, setUser] = useState<User>(initalUserState);
   const getUsers = async () => {
     const data = await Api.getUsers();
     setUsers(data);
   };
   const updateUser = async (user?: User) => {
-    await Api.updateUser(user);
-    getUsers();
-    setIsOpen(false);
+    try {
+      await Api.updateUser(user);
+      getUsers();
+      setIsOpen(false);
+    } catch (error) {
+      return new Error("Error updating user");
+    }
   };
 
   const deleteUser = async (id?: number) => {
-    await Api.deleteUser(id);
-    getUsers();
-    setIsOpen(false);
+    try {
+      await Api.deleteUser(id);
+      getUsers();
+      setIsOpen(false);
+    } catch (error) {
+      return new Error("Error deleting user");
+    }
   };
 
   const getUser = async (id: number) => {
-    const user = await Api.getUserById(id);
+    try {
+      const user = await Api.getUserById(id);
 
-    setUser(user);
-    setIsOpen(true);
+      setUser(user);
+      setIsOpen(true);
+    } catch {
+      return new Error("Error getting user");
+    }
   };
 
   return (
